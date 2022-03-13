@@ -57,7 +57,6 @@ def gatherInfoSoftware(targets):
             result = subprocess.run(['nmap','-A', target[1], '-p',str(port)],universal_newlines = True, stdout = subprocess.PIPE)
             for line in result.stdout.split("\n"):
                 if port in line and target[2].loc[target[2]['Port'] == port, 'Service'].item() in line:
-                    print("Yes Barry")
                     line = line.split(" ")
                     line.remove('')
                     #Delete data we already have e.g 445/tcp open..
